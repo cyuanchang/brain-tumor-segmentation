@@ -15,3 +15,4 @@ artifacts/
 .ipynb_checkpoints/
 .DS_Store
 _extract_assets.py
+docs/
