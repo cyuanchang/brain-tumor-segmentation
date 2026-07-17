@@ -4,8 +4,6 @@ Documentary repository for a Veritas AI Capstone project: **glioma tumor segment
 
 **Team:** Esha Verma, Deeksha, Wellon Chen, Victor Wong — 8/13/2023
 
-![Title](presentation/01_title.png)
-
 ---
 
 ## Motivation
