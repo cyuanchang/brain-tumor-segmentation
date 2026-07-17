@@ -109,7 +109,3 @@ Patient-level **predicted vs ground-truth tumor volumes** (slice area × 3.5 mm 
 - Train longer (more epochs)  
 - Try additional architectures for higher accuracy  
 
----
-
-Code is cleaned from the Capstone [Colab notebook](https://colab.research.google.com/drive/1ZYrTpLoDivjDKqAazFdhRYUrNaoHQ-0u). Project narrative is summarized in this README with supporting presentation slides.
-
