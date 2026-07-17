@@ -4,11 +4,15 @@ Documentary repository for a Veritas AI Capstone project: **glioma tumor segment
 
 **Team:** Esha Verma, Deeksha, Wellon Chen, Victor Wong — 8/13/2023
 
+![Title](presentation/01_title.png)
+
 ---
 
 ## Motivation
 
 Brain tumors are a deadly disease. Accurately detecting tumors matters for treatment and prognosis. This project segments **glioma** tumors from MRI using deep learning.
+
+![Motivation](presentation/02_motivation.png)
 
 ---
 
@@ -22,6 +26,8 @@ Derived from **BraTS 2018**-style slices prepared for the Capstone:
 | Patients with glioma | **152** |
 
 Each sample is an MRI slice (`.jpg`) paired with a segmentation mask (`.png`).
+
+![Data](presentation/03_data.png)
 
 Expected layout for local training:
 
@@ -48,6 +54,8 @@ Example slice statistics from the Capstone presentation:
 - Min = 0, Max = 150, Mean = 4, Std = 21
 - Unique pixel values: `0, 50, 100, 150` (background + multi-region tumor labels)
 
+![EDA](presentation/04_eda.png)
+
 The baseline model **binarizes** masks: any non-zero label → tumor (class 1).
 
 ---
@@ -62,6 +70,8 @@ Pipeline steps (from the project presentation / Colab):
 4. Resize → `(120, 120)`  
 5. One-hot encode  
 
+![Preprocessing](presentation/05_preprocessing.png)
+
 Implemented in `src/brain_tumor_segmentation/data.py` as `preprocess_data` and `create_data_pipeline` (`tf.data`, shuffle / batch / prefetch). By default the Colab used a **500-slice** subset for faster iteration; use `--full-dataset` to disable that cap.
 
 ---
@@ -69,6 +79,8 @@ Implemented in `src/brain_tumor_segmentation/data.py` as `preprocess_data` and `
 ## Baseline Model
 
 A **2-level U-Net** (encoder → bottleneck → decoder with skip connections), trained with categorical cross-entropy and a tumor Dice metric.
+
+![U-Net](presentation/06_unet.png)
 
 Default settings (from Colab):
 
@@ -91,11 +103,15 @@ Patient-level **predicted vs ground-truth tumor volumes** (slice area × 3.5 mm 
 - Linear fit: **y = 1.09x − 1.41**, **r = 0.76**
 - Bland–Altman mean difference ≈ **−0.21**
 
+![Results](presentation/07_results.png)
+
 Interpretation from the presentation: performance is reasonable, but **larger tumors tend to be predicted larger than they really are**.
 
 ---
 
 ## Summary & Future Work
+
+![Summary](presentation/08_summary.png)
 
 **Done**
 
@@ -116,6 +132,7 @@ brain_tumor_segmentation/
 ├── README.md
 ├── pyproject.toml
 ├── requirements.txt
+├── presentation/             # whole slides shown in this README
 ├── notebooks/
 │   └── original_colab.ipynb
 ├── scripts/
@@ -131,7 +148,7 @@ brain_tumor_segmentation/
     └── models/unet.py
 ```
 
-Code is cleaned from the Capstone [Colab notebook](https://colab.research.google.com/drive/1ZYrTpLoDivjDKqAazFdhRYUrNaoHQ-0u). Project narrative is summarized in this README.
+Code is cleaned from the Capstone [Colab notebook](https://colab.research.google.com/drive/1ZYrTpLoDivjDKqAazFdhRYUrNaoHQ-0u). Project narrative is summarized in this README with supporting presentation slides.
 
 ---
 
