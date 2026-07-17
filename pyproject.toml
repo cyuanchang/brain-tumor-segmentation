@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brain-tumor-segmentation"
+version = "0.1.0"
+description = "Documentary + cleaned package for BraTS glioma MRI segmentation with a baseline U-Net"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Esha Verma" },
+  { name = "Deeksha" },
+  { name = "Wellon Chen" },
+  { name = "Victor Wong" },
+]
+dependencies = [
+  "numpy",
+  "matplotlib",
+  "tensorflow",
+  "Pillow",
+  "scikit-image",
+  "scipy",
+  "statsmodels",
+]
+
+[project.optional-dependencies]
+dev = ["ipykernel", "jupyter"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,7 @@
+numpy
+matplotlib
+tensorflow
+Pillow
+scikit-image
+scipy
+statsmodels
