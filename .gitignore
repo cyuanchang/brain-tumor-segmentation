@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+artifacts/
+*.keras
+*.h5
+.ipynb_checkpoints/
+.DS_Store
+_extract_assets.py
