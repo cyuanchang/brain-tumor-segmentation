@@ -2,8 +2,6 @@
 
 Documentary repository for a Veritas AI Capstone project: **glioma tumor segmentation from MRI** with a baseline U-Net, plus patient-level tumor volume estimation.
 
-**Team:** Esha Verma, Deeksha, Wellon Chen, Victor Wong — 8/13/2023
-
 ---
 
 ## Motivation
@@ -23,7 +21,7 @@ Derived from **BraTS 2018**-style slices prepared for the Capstone:
 | MRI slices | **4,715** |
 | Patients with glioma | **152** |
 
-Each sample is an MRI slice (`.jpg`) paired with a segmentation mask (`.png`).
+Each sample is an MRI slice paired with a segmentation mask.
 
 ![Data](presentation/03_data.png)
 
@@ -40,8 +38,6 @@ data/
 ---
 
 ## Exploratory Data Analysis
-
-Example slice statistics from the Capstone presentation:
 
 **MRI**
 
@@ -60,13 +56,7 @@ The baseline model **binarizes** masks: any non-zero label → tumor (class 1).
 
 ## Preprocessing
 
-Pipeline steps (from the project presentation / Colab):
-
-1. Open  
-2. Decode  
-3. Binarize classes  
-4. Resize → `(120, 120)`  
-5. One-hot encode  
+Pipeline steps :
 
 ![Preprocessing](presentation/05_preprocessing.png)
 
@@ -80,7 +70,7 @@ A **2-level U-Net** (encoder → bottleneck → decoder with skip connections), 
 
 ![U-Net](presentation/06_unet.png)
 
-Default settings (from Colab):
+Default settings:
 
 | Setting | Value |
 |---|---|
@@ -103,8 +93,6 @@ Patient-level **predicted vs ground-truth tumor volumes** (slice area × 3.5 mm 
 
 ![Results](presentation/07_results.png)
 
-Interpretation from the presentation: performance is reasonable, but **larger tumors tend to be predicted larger than they really are**.
-
 ---
 
 ## Summary & Future Work
@@ -123,72 +111,5 @@ Interpretation from the presentation: performance is reasonable, but **larger tu
 
 ---
 
-## Repository layout
-
-```text
-brain_tumor_segmentation/
-├── README.md
-├── pyproject.toml
-├── requirements.txt
-├── presentation/             # whole slides shown in this README
-├── notebooks/
-│   └── original_colab.ipynb
-├── scripts/
-│   ├── train.py
-│   └── evaluate.py
-└── src/brain_tumor_segmentation/
-    ├── config.py
-    ├── data.py
-    ├── metrics.py
-    ├── evaluate.py
-    ├── volume.py
-    ├── viz.py
-    └── models/unet.py
-```
-
 Code is cleaned from the Capstone [Colab notebook](https://colab.research.google.com/drive/1ZYrTpLoDivjDKqAazFdhRYUrNaoHQ-0u). Project narrative is summarized in this README with supporting presentation slides.
 
----
-
-## Setup
-
-```bash
-cd E:\brain_tumor_segmentation
-python -m venv .venv
-.venv\Scripts\activate
-pip install -e .
-```
-
-Or: `pip install -r requirements.txt` and set `PYTHONPATH=src`.
-
-GPU (optional) follows your TensorFlow / CUDA install.
-
----
-
-## Train
-
-```bash
-python scripts/train.py --data-root path\to\BraTS_split --epochs 20
-```
-
-Useful flags:
-
-- `--full-dataset` — use all slices (no 500-sample cap)  
-- `--output-dir artifacts` — where `baseline_unet.keras` is saved  
-
----
-
-## Evaluate
-
-```bash
-python scripts/evaluate.py --data-root path\to\BraTS_split --model-path artifacts\baseline_unet.keras
-```
-
-Prints mean tumor Dice on the validation subset and Pearson **r** for patient volumes (same analysis as the Colab).
-
----
-
-## Original sources
-
-- Colab: https://colab.research.google.com/drive/1ZYrTpLoDivjDKqAazFdhRYUrNaoHQ-0u  
-- Notebook snapshot: `notebooks/original_colab.ipynb`  
